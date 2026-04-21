@@ -1,0 +1,1672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Silver Century Daily & Monthly Report</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+   
+  <style>
+    :root{
+      --bg1:#07111f;
+      --bg2:#0f172a;
+      --bg3:#162033;
+      --card:rgba(255,255,255,0.08);
+      --line:rgba(255,255,255,0.10);
+      --text:#f8fafc;
+      --muted:#94a3b8;
+      --primary:#38bdf8;
+      --primary-dark:#0284c7;
+      --green:#22c55e;
+      --red:#ef4444;
+      --yellow:#f59e0b;
+      --violet:#8b5cf6;
+      --shadow:0 18px 40px rgba(0,0,0,0.28);
+      --radius:22px;
+    }
+
+    *{box-sizing:border-box}
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family:'Poppins',sans-serif;
+      color:var(--text);
+      min-height:100vh;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(56,189,248,0.14), transparent 28%),
+        radial-gradient(circle at 100% 0%, rgba(139,92,246,0.12), transparent 24%),
+        radial-gradient(circle at 50% 100%, rgba(236,72,153,0.08), transparent 30%),
+        linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+    }
+
+    .container{
+      width:min(1500px, 95%);
+      margin:auto;
+      padding:22px 0 36px;
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:14px;
+      padding:16px 18px;
+      background:rgba(255,255,255,0.08);
+      border:1px solid var(--line);
+      border-radius:26px;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(14px);
+      margin-bottom:18px;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
+    .logo{
+      width:56px;
+      height:56px;
+      object-fit:cover;
+      border-radius:50%;
+      background:#fff;
+      border:2px solid rgba(255,255,255,0.16);
+      flex-shrink:0;
+    }
+
+    .brand-text{
+      min-width:0;
+    }
+
+    .brand h2{
+      margin:0;
+      font-size:20px;
+      font-weight:800;
+      letter-spacing:0.4px;
+    }
+
+    .brand p{
+      margin:2px 0 0;
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .topbar-right{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .pill{
+      padding:10px 14px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:12px;
+      color:#e2e8f0;
+      background:linear-gradient(135deg, rgba(56,189,248,0.16), rgba(139,92,246,0.16));
+      border:1px solid var(--line);
+    }
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.25fr 0.75fr;
+      gap:18px;
+      margin-bottom:18px;
+    }
+
+    .hero-card,
+    .hero-side{
+      background:rgba(255,255,255,0.08);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(14px);
+      padding:22px;
+    }
+
+    .hero-card h1{
+      margin:0 0 6px;
+      font-size:clamp(28px, 4vw, 42px);
+      line-height:1.08;
+      font-weight:800;
+    }
+
+    .hero-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      max-width:760px;
+    }
+
+    .hero-tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:16px;
+    }
+
+    .hero-tag{
+      padding:8px 12px;
+      font-size:11px;
+      font-weight:700;
+      border-radius:999px;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.08);
+      color:#dbeafe;
+    }
+
+    .hero-side{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:10px;
+    }
+
+    .hero-side .big{
+      font-size:34px;
+      font-weight:800;
+      line-height:1;
+    }
+
+    .hero-side .label{
+      color:var(--muted);
+      font-size:12px;
+      font-weight:600;
+      text-transform:uppercase;
+      letter-spacing:0.8px;
+    }
+
+    .hero-side .sub{
+      color:#cbd5e1;
+      font-size:12px;
+    }
+
+    .stats-grid{
+      display:grid;
+      grid-template-columns:repeat(6,1fr);
+      gap:14px;
+      margin-bottom:18px;
+    }
+
+    .stat-card{
+      position:relative;
+      overflow:hidden;
+      background:rgba(255,255,255,0.08);
+      border:1px solid var(--line);
+      border-radius:20px;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(12px);
+      padding:16px;
+      min-height:118px;
+    }
+
+    .stat-card::after{
+      content:"";
+      position:absolute;
+      width:100px;
+      height:100px;
+      top:-38px;
+      right:-30px;
+      border-radius:50%;
+      background:rgba(255,255,255,0.05);
+    }
+
+    .stat-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:8px;
+    }
+
+    .stat-title{
+      color:var(--muted);
+      font-size:12px;
+      font-weight:600;
+      line-height:1.4;
+    }
+
+    .stat-icon{
+      width:36px;
+      height:36px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      font-size:16px;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+
+    .stat-value{
+      margin-top:14px;
+      font-size:28px;
+      font-weight:800;
+      line-height:1;
+    }
+
+    .stat-sub{
+      margin-top:8px;
+      font-size:11px;
+      color:#cbd5e1;
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns:1.18fr 0.82fr;
+      gap:18px;
+      align-items:start;
+      margin-bottom:18px;
+    }
+
+    .stack{
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+
+    .panel{
+      background:rgba(255,255,255,0.08);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(12px);
+      padding:18px;
+    }
+
+    .panel-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:14px;
+    }
+
+    .panel-title{
+      margin:0;
+      font-size:18px;
+      font-weight:800;
+      letter-spacing:0.2px;
+    }
+
+    .panel-sub{
+      color:var(--muted);
+      font-size:12px;
+      margin-top:4px;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+
+    .field label{
+      font-size:12px;
+      font-weight:700;
+      color:#dbe3f0;
+    }
+
+    input, select, textarea{
+      width:100%;
+      padding:12px 13px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.08);
+      outline:none;
+      background:#111b2b;
+      color:white;
+      font-family:'Poppins',sans-serif;
+      font-size:13px;
+      transition:0.2s ease;
+    }
+
+    input:focus, select:focus, textarea:focus{
+      border-color:rgba(56,189,248,0.7);
+      box-shadow:0 0 0 3px rgba(56,189,248,0.10);
+    }
+
+    input::placeholder, textarea::placeholder{
+      color:#71839f;
+    }
+
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:16px;
+    }
+
+    button{
+      border:none;
+      outline:none;
+      cursor:pointer;
+      font-family:'Poppins',sans-serif;
+      font-weight:700;
+      font-size:13px;
+      padding:11px 15px;
+      border-radius:14px;
+      transition:0.25s ease;
+      box-shadow:0 8px 18px rgba(0,0,0,0.18);
+    }
+
+    button:hover{
+      transform:translateY(-2px);
+    }
+
+    .primary{
+      color:white;
+      background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+    }
+
+    .secondary{
+      color:white;
+      background:#334155;
+    }
+
+    .warning{
+      color:#111827;
+      background:var(--yellow);
+    }
+
+    .danger{
+      color:white;
+      background:var(--red);
+    }
+
+    .success{
+      color:white;
+      background:linear-gradient(135deg,#22c55e,#16a34a);
+    }
+
+    .violet{
+      color:white;
+      background:linear-gradient(135deg,#8b5cf6,#7c3aed);
+      box-shadow:0 6px 18px rgba(139,92,246,0.35);
+    }
+
+    .violet:hover{
+      transform:translateY(-2px) scale(1.02);
+      box-shadow:0 10px 25px rgba(139,92,246,0.45);
+    }
+
+    .small-btn{
+      font-size:12px;
+      padding:8px 11px;
+      border-radius:11px;
+    }
+
+    .filter-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      align-items:end;
+    }
+
+    .quick-summary{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+      margin-top:14px;
+    }
+
+    .mini-card{
+      padding:14px;
+      border-radius:18px;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+
+    .mini-card .mini-label{
+      font-size:11px;
+      color:var(--muted);
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:0.6px;
+      margin-bottom:8px;
+    }
+
+    .mini-card .mini-value{
+      font-size:24px;
+      font-weight:800;
+      line-height:1;
+    }
+
+    .mini-card .mini-sub{
+      margin-top:7px;
+      font-size:11px;
+      color:#cbd5e1;
+    }
+
+    .agent-rank-list{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .rank-item{
+      display:grid;
+      grid-template-columns:auto 1fr auto;
+      gap:12px;
+      align-items:center;
+      padding:12px;
+      border-radius:16px;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.07);
+    }
+
+    .rank-no{
+      width:34px;
+      height:34px;
+      display:grid;
+      place-items:center;
+      border-radius:12px;
+      font-weight:800;
+      background:rgba(56,189,248,0.12);
+      color:#dff6ff;
+      border:1px solid rgba(56,189,248,0.20);
+    }
+
+    .rank-name{
+      font-weight:700;
+      font-size:13px;
+    }
+
+    .rank-sub{
+      font-size:11px;
+      color:var(--muted);
+      margin-top:2px;
+    }
+
+    .rank-value{
+      text-align:right;
+      font-weight:800;
+      font-size:18px;
+    }
+
+    .rank-value small{
+      display:block;
+      font-size:10px;
+      color:var(--muted);
+      font-weight:600;
+      margin-top:2px;
+    }
+
+    .table-wrap{
+      overflow:auto;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,0.02);
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:1080px;
+      background:rgba(8,15,28,0.35);
+      font-size:12px;
+    }
+
+    th, td{
+      padding:10px 8px;
+      text-align:center;
+      border-bottom:1px solid var(--line);
+      font-size:12px;
+      vertical-align:middle;
+    }
+
+    th{
+      position:sticky;
+      top:0;
+      z-index:1;
+      white-space:nowrap;
+      background:rgba(255,255,255,0.05);
+      color:#dbe3f0;
+      text-transform:uppercase;
+      letter-spacing:0.5px;
+      font-size:11px;
+    }
+
+    tr:hover td{
+      background:rgba(255,255,255,0.03);
+    }
+
+    td{
+      white-space:normal;
+    }
+
+    .compact-cell{
+      min-width:260px;
+    }
+
+    .action-cell{
+      min-width:140px;
+    }
+
+    .breakdown{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:5px;
+      max-width:320px;
+      margin:auto;
+    }
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:4px;
+      padding:4px 7px;
+      border-radius:999px;
+      font-size:10px;
+      line-height:1.2;
+      white-space:nowrap;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+
+    .reached{
+      color:var(--green);
+      font-weight:800;
+    }
+
+    .not-reached{
+      color:var(--red);
+      font-weight:800;
+    }
+
+    .good{
+      color:var(--green);
+      font-weight:800;
+    }
+
+    .bad{
+      color:var(--red);
+      font-weight:800;
+    }
+
+    .warn{
+      color:var(--yellow);
+      font-weight:800;
+    }
+
+    .total-row td{
+      background:rgba(255,255,255,0.08);
+      font-weight:800;
+    }
+
+    .month-total-row td{
+      background:rgba(56,189,248,0.08);
+      font-weight:700;
+    }
+
+    .muted{
+      color:var(--muted);
+    }
+
+    .footer-note{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:11px;
+      text-align:right;
+    }
+
+    .toast{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:9999;
+      background:rgba(15,23,42,0.94);
+      border:1px solid rgba(255,255,255,0.10);
+      color:white;
+      padding:13px 16px;
+      border-radius:14px;
+      box-shadow:var(--shadow);
+      font-size:13px;
+      font-weight:700;
+      transform:translateY(20px);
+      opacity:0;
+      pointer-events:none;
+      transition:0.28s ease;
+      max-width:320px;
+    }
+
+    .toast.show{
+      transform:translateY(0);
+      opacity:1;
+    }
+
+    @media (max-width:1320px){
+      .stats-grid{grid-template-columns:repeat(3,1fr);}
+      .layout{grid-template-columns:1fr;}
+    }
+
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;}
+      .form-grid{grid-template-columns:repeat(2,1fr);}
+      .filter-grid{grid-template-columns:repeat(2,1fr);}
+      .quick-summary{grid-template-columns:1fr 1fr;}
+    }
+
+    @media (max-width:700px){
+      .container{width:min(94%, 94%);}
+      .stats-grid{grid-template-columns:1fr;}
+      .form-grid{grid-template-columns:1fr;}
+      .filter-grid{grid-template-columns:1fr;}
+      .quick-summary{grid-template-columns:1fr;}
+      .topbar{padding:14px;}
+      .hero-card, .hero-side, .panel{padding:16px;}
+      table{min-width:980px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="topbar">
+      <div class="brand">
+        <img src="lo2.jpeg" class="logo" alt="Silver Century Logo">
+        <div class="brand-text">
+          <h2>Silver Century</h2>
+          <p>Professional Daily Report Dashboard • Monthly History • Team Monitoring</p>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <div class="pill">📊 Clean Report System</div>
+        <div class="pill">👥 Daily + Monthly</div>
+        <div class="pill">💾 Local Save</div>
+      </div>
+    </div>
+
+    <div class="hero">
+      <div class="hero-card">
+        <h1>Agent Daily & Monthly Report Dashboard</h1>
+        <p>
+          Monitor total inquiries, A2A, B2B, ticket, visa, package, extra, no response, katchara, bookings,
+          daily quota, previous days record, and whole month total.
+        </p>
+
+        <div class="hero-tags">
+          <span class="hero-tag">Daily record</span>
+          <span class="hero-tag">Whole month summary</span>
+          <span class="hero-tag">Compact tables</span>
+          <span class="hero-tag">Edit & delete</span>
+          <span class="hero-tag">Agent ranking</span>
+          <span class="hero-tag">Backup import/export</span>
+        </div>
+      </div>
+
+      <div class="hero-side">
+        <div class="label">Current Month Target</div>
+        <div class="big" id="heroTargetText">15,000</div>
+        <div class="sub">Monthly team inquiry goal</div>
+        <div class="label" style="margin-top:8px;">Daily Quota Per Record</div>
+        <div class="big" style="font-size:28px;" id="heroQuotaText">55</div>
+        <div class="sub">Used in daily quota status</div>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-top">
+          <div class="stat-title">Today Total Inquiry</div>
+          <div class="stat-icon">📅</div>
+        </div>
+        <div class="stat-value" id="todayTotalCard">0</div>
+        <div class="stat-sub">All inquiries for selected date / today</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-top">
+          <div class="stat-title">Selected Month Total</div>
+          <div class="stat-icon">📈</div>
+        </div>
+        <div class="stat-value" id="monthTotalCard">0</div>
+        <div class="stat-sub">Whole month inquiry total</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-top">
+          <div class="stat-title">Monthly Target</div>
+          <div class="stat-icon">🎯</div>
+        </div>
+        <div class="stat-value" id="monthlyTargetCard">15,000</div>
+        <div class="stat-sub">Team monthly target</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-top">
+          <div class="stat-title">Total Bookings</div>
+          <div class="stat-icon">✅</div>
+        </div>
+        <div class="stat-value" id="bookingTotalCard">0</div>
+        <div class="stat-sub">For selected month</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-top">
+          <div class="stat-title">No Response</div>
+          <div class="stat-icon">❌</div>
+        </div>
+        <div class="stat-value" id="noResponseCard">0</div>
+        <div class="stat-sub">For selected month</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-top">
+          <div class="stat-title">Katchara</div>
+          <div class="stat-icon">⚠️</div>
+        </div>
+        <div class="stat-value" id="katcharaCard">0</div>
+        <div class="stat-sub">For selected month</div>
+      </div>
+    </div>
+
+    <div class="layout">
+      <div class="stack">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <h3 class="panel-title">Add / Edit Daily Report</h3>
+              <div class="panel-sub">Fill in the report details for each agent. You can edit and delete anytime.</div>
+            </div>
+            <div class="pill" id="editingBadge">Mode: Add New Record</div>
+          </div>
+
+          <div class="form-grid">
+            <div class="field">
+              <label>Date</label>
+              <input type="date" id="date">
+            </div>
+
+            <div class="field">
+              <label>Agent</label>
+              <select id="agent">
+                <option value="">Select Agent</option>
+                <option>👩‍💼 Agent Dyan</option>
+                <option>👩‍💼 Agent Mary</option>
+                <option>👩‍💼 Agent Mazie</option>
+                <option>👩‍💼 Agent Kris</option>
+                <option>👩‍💼 Agent Rossel</option>
+                <option>👩‍💼 Agent Valerie</option>
+                <option>👩‍💼 Agent Zarah</option>
+                <option>👩‍💼 Agent Shiela</option>
+                <option>👩‍💼 Agent Anjelie</option>
+                <option>👩‍💼 Agent Joy</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Total Inquiries</label>
+              <input type="number" id="inquiries" placeholder="Total Inquiries" min="0">
+            </div>
+
+            <div class="field">
+              <label>Bookings</label>
+              <input type="number" id="bookings" placeholder="Bookings" min="0">
+            </div>
+
+            <div class="field">
+              <label>A2A</label>
+              <input type="number" id="a2a" placeholder="A2A" min="0">
+            </div>
+
+            <div class="field">
+              <label>B2B</label>
+              <input type="number" id="b2b" placeholder="B2B" min="0">
+            </div>
+
+            <div class="field">
+              <label>Ticket</label>
+              <input type="number" id="ticket" placeholder="Ticket" min="0">
+            </div>
+
+            <div class="field">
+              <label>Visa</label>
+              <input type="number" id="visa" placeholder="Visa" min="0">
+            </div>
+
+            <div class="field">
+              <label>Package</label>
+              <input type="number" id="package" placeholder="Package" min="0">
+            </div>
+
+            <div class="field">
+              <label>Extra</label>
+              <input type="number" id="extra" placeholder="Extra" min="0">
+            </div>
+
+            <div class="field">
+              <label>No Response</label>
+              <input type="number" id="noresponse" placeholder="No Response" min="0">
+            </div>
+
+            <div class="field">
+              <label>Katchara</label>
+              <input type="number" id="katchara" placeholder="Katchara" min="0">
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="primary" onclick="saveReport()">Save Report</button>
+            <button class="secondary" onclick="cancelEdit()">Cancel Edit</button>
+            <button class="warning" onclick="clearForm()">Clear Form</button>
+            <button class="success" onclick="exportData()">Export Backup</button>
+            <button class="violet" onclick="document.getElementById('importFile').click()">📥 Import Backup</button>
+            <input type="file" id="importFile" accept=".json" style="display:none;">
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <h3 class="panel-title">Filter Records</h3>
+              <div class="panel-sub">Filter by month, agent, or exact date.</div>
+            </div>
+          </div>
+
+          <div class="filter-grid">
+            <div class="field">
+              <label>Filter Month</label>
+              <input type="month" id="monthFilter">
+            </div>
+
+            <div class="field">
+              <label>Filter Agent</label>
+              <select id="agentFilter">
+                <option value="">All Agents</option>
+                <option>Agent Dyan</option>
+                <option>Agent Mary</option>
+                <option>Agent Mazie</option>
+                <option>Agent Kris</option>
+                <option>Agent Rossel</option>
+                <option>Agent Valerie</option>
+                <option>Agent Zarah</option>
+                <option>Agent Shiela</option>
+                <option>Agent Anjelie</option>
+                <option>Agent Joy</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Filter Date</label>
+              <input type="date" id="dateFilter">
+            </div>
+
+            <div class="field">
+              <label>Actions</label>
+              <div class="actions" style="margin-top:0;">
+                <button class="primary small-btn" onclick="renderAll()">Apply</button>
+                <button class="secondary small-btn" onclick="resetFilters()">Reset</button>
+                <button class="danger small-btn" onclick="clearAllReports()">Clear All</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="quick-summary">
+            <div class="mini-card">
+              <div class="mini-label">Filtered Records</div>
+              <div class="mini-value" id="filteredRecordCount">0</div>
+              <div class="mini-sub">How many records currently shown</div>
+            </div>
+
+            <div class="mini-card">
+              <div class="mini-label">Filtered Agent Count</div>
+              <div class="mini-value" id="filteredAgentCount">0</div>
+              <div class="mini-sub">Unique agents in current filter</div>
+            </div>
+
+            <div class="mini-card">
+              <div class="mini-label">Average Inquiry / Record</div>
+              <div class="mini-value" id="averageInquiryCard">0</div>
+              <div class="mini-sub">Based on current filtered records</div>
+            </div>
+
+            <div class="mini-card">
+              <div class="mini-label">Booking Rate</div>
+              <div class="mini-value" id="bookingRateCard">0%</div>
+              <div class="mini-sub">Bookings ÷ inquiries for current month</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <h3 class="panel-title">Top Agents This Month</h3>
+              <div class="panel-sub">Ranking is based on selected month total inquiries.</div>
+            </div>
+          </div>
+          <div class="agent-rank-list" id="agentRanking"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <h3 class="panel-title">Month Performance</h3>
+              <div class="panel-sub">Quick target progress view.</div>
+            </div>
+          </div>
+
+          <div class="quick-summary">
+            <div class="mini-card">
+              <div class="mini-label">Target Left</div>
+              <div class="mini-value" id="targetLeftCard">0</div>
+              <div class="mini-sub">How many more inquiries to reach target</div>
+            </div>
+
+            <div class="mini-card">
+              <div class="mini-label">Target Status</div>
+              <div class="mini-value" id="targetStatusCard">Pending</div>
+              <div class="mini-sub">Reached or not reached</div>
+            </div>
+
+            <div class="mini-card">
+              <div class="mini-label">Selected Date Total</div>
+              <div class="mini-value" id="selectedDateTotalCard">0</div>
+              <div class="mini-sub">Total inquiry on filter date</div>
+            </div>
+
+            <div class="mini-card">
+              <div class="mini-label">Best Agent</div>
+              <div class="mini-value" id="bestAgentCard" style="font-size:18px;line-height:1.25;">-</div>
+              <div class="mini-sub">Highest inquiry for selected month</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <div>
+          <h3 class="panel-title">Daily Records / Previous Days Record</h3>
+          <div class="panel-sub">Compact daily report table with team totals.</div>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Agent</th>
+              <th>A2A</th>
+              <th>B2B</th>
+              <th>Ticket</th>
+              <th>Visa</th>
+              <th>Package</th>
+              <th>Extra</th>
+              <th>No Response</th>
+              <th>Katchara</th>
+              <th>Bookings</th>
+              <th>Total</th>
+              <th>Breakdown</th>
+              <th>Quota</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="dailyTable"></tbody>
+        </table>
+      </div>
+      <div class="footer-note">Tip: use Edit to update old report without deleting it.</div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <div>
+          <h3 class="panel-title">Whole Month Summary</h3>
+          <div class="panel-sub">Shows monthly total inquiry, category totals, bookings, and target status.</div>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Month</th>
+              <th>A2A</th>
+              <th>B2B</th>
+              <th>Ticket</th>
+              <th>Visa</th>
+              <th>Package</th>
+              <th>Extra</th>
+              <th>No Response</th>
+              <th>Katchara</th>
+              <th>Total Bookings</th>
+              <th>Total Inquiry</th>
+              <th>Booking Rate</th>
+              <th>Target Status</th>
+            </tr>
+          </thead>
+          <tbody id="monthlyTable"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    let reports = JSON.parse(localStorage.getItem("silverCenturyReports")) || [];
+    let editId = null;
+
+    const DAILY_QUOTA = 55;
+    const MONTHLY_TARGET = 15000;
+
+    const dateInput = document.getElementById("date");
+    const agentInput = document.getElementById("agent");
+    const inquiriesInput = document.getElementById("inquiries");
+    const a2aInput = document.getElementById("a2a");
+    const b2bInput = document.getElementById("b2b");
+    const ticketInput = document.getElementById("ticket");
+    const visaInput = document.getElementById("visa");
+    const packageInput = document.getElementById("package");
+    const extraInput = document.getElementById("extra");
+    const noresponseInput = document.getElementById("noresponse");
+    const katcharaInput = document.getElementById("katchara");
+    const bookingsInput = document.getElementById("bookings");
+
+    const monthFilter = document.getElementById("monthFilter");
+    const agentFilter = document.getElementById("agentFilter");
+    const dateFilter = document.getElementById("dateFilter");
+
+    const dailyTable = document.getElementById("dailyTable");
+    const monthlyTable = document.getElementById("monthlyTable");
+    const agentRanking = document.getElementById("agentRanking");
+
+    const todayTotalCard = document.getElementById("todayTotalCard");
+    const monthTotalCard = document.getElementById("monthTotalCard");
+    const bookingTotalCard = document.getElementById("bookingTotalCard");
+    const noResponseCard = document.getElementById("noResponseCard");
+    const katcharaCard = document.getElementById("katcharaCard");
+    const monthlyTargetCard = document.getElementById("monthlyTargetCard");
+    const heroTargetText = document.getElementById("heroTargetText");
+    const heroQuotaText = document.getElementById("heroQuotaText");
+
+    const filteredRecordCount = document.getElementById("filteredRecordCount");
+    const filteredAgentCount = document.getElementById("filteredAgentCount");
+    const averageInquiryCard = document.getElementById("averageInquiryCard");
+    const bookingRateCard = document.getElementById("bookingRateCard");
+    const targetLeftCard = document.getElementById("targetLeftCard");
+    const targetStatusCard = document.getElementById("targetStatusCard");
+    const selectedDateTotalCard = document.getElementById("selectedDateTotalCard");
+    const bestAgentCard = document.getElementById("bestAgentCard");
+    const editingBadge = document.getElementById("editingBadge");
+    const importFile = document.getElementById("importFile");
+    const toast = document.getElementById("toast");
+
+    heroTargetText.textContent = MONTHLY_TARGET.toLocaleString();
+    heroQuotaText.textContent = DAILY_QUOTA.toLocaleString();
+    monthlyTargetCard.textContent = MONTHLY_TARGET.toLocaleString();
+
+    function showToast(message){
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(showToast._timer);
+      showToast._timer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2400);
+    }
+
+    function getTodayString(){
+      const now = new Date();
+      const y = now.getFullYear();
+      const m = String(now.getMonth() + 1).padStart(2, "0");
+      const d = String(now.getDate()).padStart(2, "0");
+      return `${y}-${m}-${d}`;
+    }
+
+    function getCurrentMonthString(){
+      const now = new Date();
+      const y = now.getFullYear();
+      const m = String(now.getMonth() + 1).padStart(2, "0");
+      return `${y}-${m}`;
+    }
+
+    function normalizeNumber(value){
+      return Math.max(0, Number(value) || 0);
+    }
+
+    function saveToLocal(){
+      localStorage.setItem("silverCenturyReports", JSON.stringify(reports));
+    }
+
+    function updateEditingBadge(){
+      editingBadge.textContent = editId ? "Mode: Editing Record" : "Mode: Add New Record";
+    }
+
+    function validateReport(item){
+      const sumBreakdown =
+        item.a2a + item.b2b + item.ticket + item.visa + item.package + item.extra + item.noresponse + item.katchara;
+
+      if(sumBreakdown > item.inquiries){
+        const ok = confirm("Breakdown total is bigger than Total Inquiries. Do you still want to save this record?");
+        return ok;
+      }
+      return true;
+    }
+
+    function saveReport(){
+      if(!dateInput.value){
+        alert("Please select date.");
+        return;
+      }
+
+      if(!agentInput.value){
+        alert("Please select agent.");
+        return;
+      }
+
+      const item = {
+        id: editId || Date.now(),
+        date: dateInput.value,
+        month: dateInput.value.slice(0, 7),
+        agent: agentInput.value.replace("👩‍💼 ", ""),
+        inquiries: normalizeNumber(inquiriesInput.value),
+        a2a: normalizeNumber(a2aInput.value),
+        b2b: normalizeNumber(b2bInput.value),
+        ticket: normalizeNumber(ticketInput.value),
+        visa: normalizeNumber(visaInput.value),
+        package: normalizeNumber(packageInput.value),
+        extra: normalizeNumber(extraInput.value),
+        noresponse: normalizeNumber(noresponseInput.value),
+        katchara: normalizeNumber(katcharaInput.value),
+        bookings: normalizeNumber(bookingsInput.value)
+      };
+
+      if(!validateReport(item)) return;
+
+      if(editId){
+        reports = reports.map(r => r.id === editId ? item : r);
+        showToast("✅ Report updated successfully");
+        editId = null;
+      } else {
+        reports.push(item);
+        showToast("✅ Report saved successfully");
+      }
+
+      saveToLocal();
+      clearForm();
+      updateEditingBadge();
+      renderAll();
+    }
+
+    function editReport(id){
+      const item = reports.find(r => r.id === id);
+      if(!item) return;
+
+      editId = id;
+      dateInput.value = item.date;
+      agentInput.value = "👩‍💼 " + item.agent;
+      inquiriesInput.value = item.inquiries;
+      a2aInput.value = item.a2a;
+      b2bInput.value = item.b2b;
+      ticketInput.value = item.ticket;
+      visaInput.value = item.visa;
+      packageInput.value = item.package;
+      extraInput.value = item.extra;
+      noresponseInput.value = item.noresponse || 0;
+      katcharaInput.value = item.katchara || 0;
+      bookingsInput.value = item.bookings || 0;
+
+      updateEditingBadge();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      showToast("✏️ Record loaded for editing");
+    }
+
+    function deleteReport(id){
+      const ok = confirm("Are you sure you want to delete this record?");
+      if(!ok) return;
+
+      reports = reports.filter(r => r.id !== id);
+      saveToLocal();
+      renderAll();
+
+      if(editId === id){
+        editId = null;
+        clearForm();
+        updateEditingBadge();
+      }
+
+      showToast("🗑️ Record deleted");
+    }
+
+    function clearAllReports(){
+      if(reports.length === 0){
+        showToast("No records to clear");
+        return;
+      }
+
+      const ok = confirm("Are you sure you want to delete ALL reports?");
+      if(!ok) return;
+
+      reports = [];
+      saveToLocal();
+      clearForm();
+      editId = null;
+      updateEditingBadge();
+      renderAll();
+      showToast("🧹 All reports cleared");
+    }
+
+    function cancelEdit(){
+      editId = null;
+      clearForm();
+      updateEditingBadge();
+      showToast("Editing cancelled");
+    }
+
+    function clearForm(){
+      dateInput.value = getTodayString();
+      agentInput.value = "";
+      inquiriesInput.value = "";
+      a2aInput.value = "";
+      b2bInput.value = "";
+      ticketInput.value = "";
+      visaInput.value = "";
+      packageInput.value = "";
+      extraInput.value = "";
+      noresponseInput.value = "";
+      katcharaInput.value = "";
+      bookingsInput.value = "";
+    }
+
+    function resetFilters(){
+      monthFilter.value = getCurrentMonthString();
+      agentFilter.value = "";
+      dateFilter.value = "";
+      renderAll();
+      showToast("Filters reset");
+    }
+
+    function filteredReports(){
+      let filtered = [...reports];
+
+      if(monthFilter.value){
+        filtered = filtered.filter(r => r.month === monthFilter.value);
+      }
+
+      if(agentFilter.value){
+        filtered = filtered.filter(r => r.agent === agentFilter.value);
+      }
+
+      if(dateFilter.value){
+        filtered = filtered.filter(r => r.date === dateFilter.value);
+      }
+
+      filtered.sort((a,b) => new Date(b.date) - new Date(a.date) || a.agent.localeCompare(b.agent));
+      return filtered;
+    }
+
+    function getReportsForCurrentMonth(){
+      const currentMonth = monthFilter.value || getCurrentMonthString();
+      return reports.filter(r => r.month === currentMonth);
+    }
+
+    function breakdownHTML(item){
+      return `
+        <div class="breakdown">
+          <span class="chip">🛫 A2A: ${item.a2a || 0}</span>
+          <span class="chip">🔁 B2B: ${item.b2b || 0}</span>
+          <span class="chip">🎫 Ticket: ${item.ticket || 0}</span>
+          <span class="chip">🛂 Visa: ${item.visa || 0}</span>
+          <span class="chip">📦 Package: ${item.package || 0}</span>
+          <span class="chip">➕ Extra: ${item.extra || 0}</span>
+          <span class="chip">❌ No Res: ${item.noresponse || 0}</span>
+          <span class="chip">⚠ Katchara: ${item.katchara || 0}</span>
+        </div>
+      `;
+    }
+
+    function renderDailyTable(){
+      const data = filteredReports();
+      dailyTable.innerHTML = "";
+
+      if(data.length === 0){
+        dailyTable.innerHTML = `
+          <tr>
+            <td colspan="15" class="muted">No records found for this filter.</td>
+          </tr>
+        `;
+        return;
+      }
+
+      let totalInquiries = 0;
+      let totalA2A = 0;
+      let totalB2B = 0;
+      let totalTicket = 0;
+      let totalVisa = 0;
+      let totalPackage = 0;
+      let totalExtra = 0;
+      let totalNoResponse = 0;
+      let totalKatchara = 0;
+      let totalBookings = 0;
+
+      data.forEach(item => {
+        totalInquiries += item.inquiries;
+        totalA2A += item.a2a;
+        totalB2B += item.b2b;
+        totalTicket += item.ticket;
+        totalVisa += item.visa;
+        totalPackage += item.package;
+        totalExtra += item.extra;
+        totalNoResponse += item.noresponse || 0;
+        totalKatchara += item.katchara || 0;
+        totalBookings += item.bookings || 0;
+
+        const quotaText = item.inquiries >= DAILY_QUOTA
+          ? `<span class="reached">Reached</span>`
+          : `<span class="not-reached">${DAILY_QUOTA - item.inquiries} left</span>`;
+
+        dailyTable.innerHTML += `
+          <tr>
+            <td>${item.date}</td>
+            <td>${item.agent}</td>
+            <td>${item.a2a}</td>
+            <td>${item.b2b}</td>
+            <td>${item.ticket}</td>
+            <td>${item.visa}</td>
+            <td>${item.package}</td>
+            <td>${item.extra}</td>
+            <td>${item.noresponse || 0}</td>
+            <td>${item.katchara || 0}</td>
+            <td>${item.bookings || 0}</td>
+            <td>${item.inquiries}</td>
+            <td class="compact-cell">${breakdownHTML(item)}</td>
+            <td>${quotaText}</td>
+            <td class="action-cell">
+              <button class="warning small-btn" onclick="editReport(${item.id})">Edit</button>
+              <button class="danger small-btn" onclick="deleteReport(${item.id})">Delete</button>
+            </td>
+          </tr>
+        `;
+      });
+
+      const totalStatus = totalInquiries >= MONTHLY_TARGET
+        ? `<span class="reached">🔥 Target Passed</span>`
+        : `<span class="not-reached">${MONTHLY_TARGET - totalInquiries} left</span>`;
+
+      dailyTable.innerHTML += `
+        <tr class="total-row">
+          <td colspan="2">TEAM TOTAL</td>
+          <td>${totalA2A}</td>
+          <td>${totalB2B}</td>
+          <td>${totalTicket}</td>
+          <td>${totalVisa}</td>
+          <td>${totalPackage}</td>
+          <td>${totalExtra}</td>
+          <td>${totalNoResponse}</td>
+          <td>${totalKatchara}</td>
+          <td>${totalBookings}</td>
+          <td>${totalInquiries}</td>
+          <td class="compact-cell">
+            ${breakdownHTML({
+              a2a: totalA2A,
+              b2b: totalB2B,
+              ticket: totalTicket,
+              visa: totalVisa,
+              package: totalPackage,
+              extra: totalExtra,
+              noresponse: totalNoResponse,
+              katchara: totalKatchara
+            })}
+          </td>
+          <td colspan="2">${totalStatus}</td>
+        </tr>
+      `;
+    }
+
+    function groupByMonth(allReports){
+      const grouped = {};
+
+      allReports.forEach(item => {
+        if(!grouped[item.month]){
+          grouped[item.month] = {
+            month: item.month,
+            inquiries: 0,
+            a2a: 0,
+            b2b: 0,
+            ticket: 0,
+            visa: 0,
+            package: 0,
+            extra: 0,
+            noresponse: 0,
+            katchara: 0,
+            bookings: 0
+          };
+        }
+
+        grouped[item.month].inquiries += item.inquiries || 0;
+        grouped[item.month].a2a += item.a2a || 0;
+        grouped[item.month].b2b += item.b2b || 0;
+        grouped[item.month].ticket += item.ticket || 0;
+        grouped[item.month].visa += item.visa || 0;
+        grouped[item.month].package += item.package || 0;
+        grouped[item.month].extra += item.extra || 0;
+        grouped[item.month].noresponse += item.noresponse || 0;
+        grouped[item.month].katchara += item.katchara || 0;
+        grouped[item.month].bookings += item.bookings || 0;
+      });
+
+      return Object.values(grouped).sort((a,b) => b.month.localeCompare(a.month));
+    }
+
+    function formatMonthLabel(monthStr){
+      if(!monthStr) return "";
+      const [year, month] = monthStr.split("-");
+      const date = new Date(year, month - 1, 1);
+      return date.toLocaleString("en-US", { month: "long", year: "numeric" });
+    }
+
+    function renderMonthlyTable(){
+      monthlyTable.innerHTML = "";
+
+      let source = [...reports];
+      if(agentFilter.value){
+        source = source.filter(r => r.agent === agentFilter.value);
+      }
+
+      const grouped = groupByMonth(source);
+
+      if(grouped.length === 0){
+        monthlyTable.innerHTML = `
+          <tr>
+            <td colspan="13" class="muted">No monthly summary available.</td>
+          </tr>
+        `;
+        return;
+      }
+
+      grouped.forEach(item => {
+        const bookingRate = item.inquiries > 0
+          ? ((item.bookings / item.inquiries) * 100).toFixed(1)
+          : "0.0";
+
+        const status = item.inquiries >= MONTHLY_TARGET
+          ? `<span class="good">Reached Target</span>`
+          : `<span class="bad">${MONTHLY_TARGET - item.inquiries} left</span>`;
+
+        monthlyTable.innerHTML += `
+          <tr class="month-total-row">
+            <td>${formatMonthLabel(item.month)}</td>
+            <td>${item.a2a}</td>
+            <td>${item.b2b}</td>
+            <td>${item.ticket}</td>
+            <td>${item.visa}</td>
+            <td>${item.package}</td>
+            <td>${item.extra}</td>
+            <td>${item.noresponse}</td>
+            <td>${item.katchara}</td>
+            <td>${item.bookings}</td>
+            <td>${item.inquiries.toLocaleString()}</td>
+            <td>${bookingRate}%</td>
+            <td>${status}</td>
+          </tr>
+        `;
+      });
+    }
+
+    function renderRanking(){
+      agentRanking.innerHTML = "";
+
+      const monthData = getReportsForCurrentMonth();
+      const grouped = {};
+
+      monthData.forEach(item => {
+        if(agentFilter.value && item.agent !== agentFilter.value) return;
+
+        if(!grouped[item.agent]){
+          grouped[item.agent] = {
+            agent: item.agent,
+            inquiries: 0,
+            bookings: 0
+          };
+        }
+
+        grouped[item.agent].inquiries += item.inquiries || 0;
+        grouped[item.agent].bookings += item.bookings || 0;
+      });
+
+      const ranking = Object.values(grouped).sort((a,b) => b.inquiries - a.inquiries);
+
+      if(ranking.length === 0){
+        agentRanking.innerHTML = `<div class="muted">No ranking data available.</div>`;
+        bestAgentCard.textContent = "-";
+        return;
+      }
+
+      bestAgentCard.textContent = ranking[0].agent;
+
+      ranking.slice(0, 6).forEach((item, index) => {
+        const bookingRate = item.inquiries > 0 ? ((item.bookings / item.inquiries) * 100).toFixed(1) : "0.0";
+
+        agentRanking.innerHTML += `
+          <div class="rank-item">
+            <div class="rank-no">${index + 1}</div>
+            <div>
+              <div class="rank-name">${item.agent}</div>
+              <div class="rank-sub">${item.bookings} bookings • ${bookingRate}% rate</div>
+            </div>
+            <div class="rank-value">
+              ${item.inquiries}
+              <small>inquiries</small>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function updateCards(){
+      const currentMonth = monthFilter.value || getCurrentMonthString();
+      const currentDate = dateFilter.value || getTodayString();
+
+      const todayData = reports.filter(r => r.date === currentDate);
+      const monthData = reports.filter(r => r.month === currentMonth);
+
+      const todayTotal = todayData.reduce((sum, r) => sum + (r.inquiries || 0), 0);
+      const monthTotal = monthData.reduce((sum, r) => sum + (r.inquiries || 0), 0);
+      const bookingTotal = monthData.reduce((sum, r) => sum + (r.bookings || 0), 0);
+      const noResponseTotal = monthData.reduce((sum, r) => sum + (r.noresponse || 0), 0);
+      const katcharaTotal = monthData.reduce((sum, r) => sum + (r.katchara || 0), 0);
+      const bookingRate = monthTotal > 0 ? ((bookingTotal / monthTotal) * 100).toFixed(1) : "0.0";
+      const targetLeft = Math.max(0, MONTHLY_TARGET - monthTotal);
+
+      const filtered = filteredReports();
+      const filteredTotalInquiry = filtered.reduce((sum, r) => sum + (r.inquiries || 0), 0);
+      const filteredAgents = new Set(filtered.map(r => r.agent));
+      const avgInquiry = filtered.length ? (filteredTotalInquiry / filtered.length).toFixed(1) : "0.0";
+
+      todayTotalCard.textContent = todayTotal.toLocaleString();
+      monthTotalCard.textContent = monthTotal.toLocaleString();
+      bookingTotalCard.textContent = bookingTotal.toLocaleString();
+      noResponseCard.textContent = noResponseTotal.toLocaleString();
+      katcharaCard.textContent = katcharaTotal.toLocaleString();
+
+      filteredRecordCount.textContent = filtered.length.toLocaleString();
+      filteredAgentCount.textContent = filteredAgents.size.toLocaleString();
+      averageInquiryCard.textContent = avgInquiry;
+      bookingRateCard.textContent = `${bookingRate}%`;
+
+      targetLeftCard.textContent = targetLeft.toLocaleString();
+      targetStatusCard.textContent = monthTotal >= MONTHLY_TARGET ? "Reached" : "Pending";
+      targetStatusCard.className = "mini-value " + (monthTotal >= MONTHLY_TARGET ? "good" : "warn");
+      selectedDateTotalCard.textContent = todayTotal.toLocaleString();
+    }
+
+    function exportData(){
+      const dataStr = JSON.stringify(reports, null, 2);
+      const blob = new Blob([dataStr], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "silver-century-report-backup.json";
+      a.click();
+
+      URL.revokeObjectURL(url);
+      showToast("📁 Backup exported");
+    }
+
+    importFile.addEventListener("change", function(e){
+      const file = e.target.files[0];
+      if(!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(event){
+        try{
+          const imported = JSON.parse(event.target.result);
+
+          if(!Array.isArray(imported)){
+            alert("Invalid backup file.");
+            return;
+          }
+
+          const ok = confirm("Import this backup and replace current records?");
+          if(!ok) return;
+
+          reports = imported;
+          saveToLocal();
+          editId = null;
+          clearForm();
+          updateEditingBadge();
+          renderAll();
+          showToast("✅ Backup imported successfully");
+        } catch(error){
+          alert("Failed to import backup file.");
+        }
+      };
+      reader.readAsText(file);
+
+      e.target.value = "";
+    });
+
+    function renderAll(){
+      renderDailyTable();
+      renderMonthlyTable();
+      renderRanking();
+      updateCards();
+    }
+
+    monthFilter.value = getCurrentMonthString();
+    dateInput.value = getTodayString();
+    updateEditingBadge();
+    renderAll();
+  </script>
+</body>
+</html>
